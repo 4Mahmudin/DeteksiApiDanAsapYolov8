@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS dari jawaban sebelumnya, tidak perlu diubah */
         :root {
             --bg-color: #1a1a2e;
             --card-color: #16213e;
@@ -64,8 +63,6 @@
     </footer>
 
     <script>
-        // Inisialisasi objek audio untuk setiap alarm
-        // Pastikan path filenya benar sesuai di folder 'static'
         const fireAlarm = new Audio('/static/alarm_besar.mp3');
         const smokeAlarm = new Audio('/static/alarm_kecil.mp3');
 
@@ -79,13 +76,10 @@
 
             // Cek tipe sinyal dan putar alarm yang sesuai
             if (detectionType === 'fire') {
-                // Hentikan alarm kecil jika sedang berbunyi
                 smokeAlarm.pause();
                 smokeAlarm.currentTime = 0;
-                // Putar alarm besar
                 fireAlarm.play().catch(error => console.error("Gagal memutar alarm api:", error));
             } else if (detectionType === 'smoke') {
-                // Hanya putar alarm kecil jika alarm besar tidak sedang berbunyi
                 if (fireAlarm.paused) {
                     smokeAlarm.play().catch(error => console.error("Gagal memutar alarm asap:", error));
                 }
@@ -97,8 +91,6 @@
             console.error("Koneksi EventSource gagal:", err);
         };
 
-        // Browser modern memblokir autoplay audio sampai pengguna berinteraksi.
-        // Klik di mana saja pada halaman akan 'membuka' izin audio.
         document.body.addEventListener('click', () => {
             fireAlarm.play();
             fireAlarm.pause();
